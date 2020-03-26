@@ -11,9 +11,9 @@ void test_transaction_gets() {
 	strcpy_s(description, 1 + strlen("descriere"), "descriere");
 
 
-	Tranzactie transaction = Tranzactie(1, 23, type, description);
-	assert(transaction.get_zi() == 1);
-	assert(transaction.get_suma() == 23);
+	Tranzactie transaction = Tranzactie(5, 30, type, description);
+	assert(transaction.get_zi() == 5);
+	assert(transaction.get_suma() == 30);
 	assert(strcmp(transaction.get_tip(),"in")==0);
 	assert(strcmp(transaction.get_descriere(),"descriere")==0);
 	
