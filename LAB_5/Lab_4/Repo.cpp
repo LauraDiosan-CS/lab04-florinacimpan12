@@ -39,26 +39,7 @@ int Repo::get_money_paid()
 	return this->money_paid;
 }
 
-void Repo::delete_transaction(Transaction t)
-{
-	int size = this->get_size();
-	if (size == 1) {
-		this->n=0;
-	}
-	else {
-		Transaction* transactions = this->get_all();
-		for (int i = 0; i < size; i++) {
-			if (transactions[i] == t) {
-				for (int j = i; j < size - 1; j++)
-					transactions[j] = transactions[j + 1];
-				size--;
 
-			}
-
-		}
-		this->n = size;
-	}
-}
 
 //void Repo::update_transaction(Transaction t1, Transaction t2)
 //{
@@ -83,5 +64,24 @@ void Repo::delete_transaction(Transaction t)
 //	}
 //	return false;
 //}
+void Repo::delete_transaction(Transaction t)
+{
+	int size = this->get_size();
+	if (size == 1) {
+		this->n=0;
+	}
+	else {
+		Transaction* transactions = this->get_all();
+		for (int i = 0; i < size; i++) {
+			if (transactions[i] == t) {
+				for (int j = i; j < size - 1; j++)
+					transactions[j] = transactions[j + 1];
+				size--;
 
+			}
+
+		}
+		this->n = size;
+	}
+}
 

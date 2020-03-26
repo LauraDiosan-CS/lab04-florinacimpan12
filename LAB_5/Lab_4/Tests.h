@@ -19,5 +19,6 @@ class Tests_service {
 public:
 
 	void test_add_transaction();
-
+	void test_delete_transaction();
+	void test_sum_by_type();
 };

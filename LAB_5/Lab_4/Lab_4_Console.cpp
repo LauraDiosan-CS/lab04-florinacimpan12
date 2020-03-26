@@ -22,6 +22,13 @@ void Console::menu_secondary_1() {
 
 }
 
+
+void Console::menu_secondary_4()
+{
+	cout << "1. Shows the total sum of all the transactions of a type"<<endl;
+	cout << "2. Shows the most valuable transaction of the out type from an imputed day" << endl;
+}
+
 void Console::menu_secondary_2() {
 	cout << "1. Delete all transactions with the given day" << endl;
 	cout << "2. Delete all transactions between two days" << endl;
@@ -37,13 +44,6 @@ void Console::menu_secondary_3() {
 	cout << "5. Print all transactions" << endl;
 
 }
-
-void Console::menu_secondary_4()
-{
-	cout << "1. Shows the total sum of all the transactions of a type"<<endl;
-	cout << "2. Shows the most valuable transaction of the out type from an imputed day" << endl;
-}
-
 void Console::menu_secondary_5()
 {
 	cout << "1. Only the transactions with the type imputed are kept" << endl;
@@ -228,14 +228,7 @@ void Console::delete_transaction_between_days()
 	this->s.delete_transactions_between_days(day_1,day_2);
 }
 
-void Console::delete_transactions_by_type()
-{
-	char* type = read_p_char();
-	this->s.delete_transactions_by_type(type);
 
-	delete[] type;
-
-}
 
 void Console::show_by_given_type()
 {
@@ -249,7 +242,14 @@ void Console::show_by_given_type()
 	delete[] type;
 
 }
+void Console::delete_transactions_by_type()
+{
+	char* type = read_p_char();
+	this->s.delete_transactions_by_type(type);
 
+	delete[] type;
+
+}
 void Console::replace_sum_in_transaction()
 {
 	cout << "Imput the attributes of the transaction that you wish to change" << endl;
@@ -275,6 +275,14 @@ void Console::show_array_with_tran_sum_over()
 		cout << transaction[i] << " ";
 }
 
+
+void Console::sold_for_the_day()
+{
+	cout << "The day for the sold: ";
+	int day = read_int();
+	cout<<this->s.sold_by_day(day)<<endl;
+}
+
 void Console::show_array_with_tran_equal()
 {
 	int length = 0;
@@ -285,20 +293,21 @@ void Console::show_array_with_tran_equal()
 	for(int i = 0; i < length; i++)
 		cout << transactions[i]<<endl;
 }
-
-void Console::sold_for_the_day()
-{
-	cout << "The day for the sold: ";
-	int day = read_int();
-	cout<<this->s.sold_by_day(day)<<endl;
-}
-
 void Console::sum_by_type()
 {
 	cout << "The type for calculating the sum: " << endl;
 	char* type = read_p_char();
 	cout<< this->s.sum_by_type(type)<<endl;
 
+	delete[] type;
+}
+
+
+void Console::keep_by_type()
+{
+	cout << "The type of the transactions that you wish to keep: " << endl;
+	char* type = read_p_char();
+	this->s.keep_by_type(type);
 	delete[] type;
 }
 
@@ -309,15 +318,6 @@ void Console::most_valuable_transaction_by_day()
 	Transaction t = this->s.most_valuable_by_day(day);
 	cout << t;
 }
-
-void Console::keep_by_type()
-{
-	cout << "The type of the transactions that you wish to keep: " << endl;
-	char* type = read_p_char();
-	this->s.keep_by_type(type);
-	delete[] type;
-}
-
 void Console::keep_by_type_and_sum()
 {
 	cout << "The type of the transactions that you wish to keep: " << endl;

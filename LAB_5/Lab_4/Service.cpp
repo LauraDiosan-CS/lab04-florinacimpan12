@@ -42,22 +42,6 @@ void Service::delete_transactions_by_day(int day)
 	}
 }
 
-void Service::delete_transactions_between_days(int day1, int day2)
-{
-	int size = this->r.get_size();
-	Transaction* transactions = this->r.get_all();
-	for (int i = 0; i < size;) {
-		if (transactions[i].get_day()>=day1 && transactions[i].get_day() <= day2) {
-			this->r.delete_transaction(transactions[i]);
-			if (size == 1 || i==size-1)
-				size = 0;
-		}
-		else {
-			i++;
-		}
-	}
-}
-
 void Service::delete_transactions_by_type(char* type)
 {
 	int size = this->r.get_size();
@@ -75,6 +59,22 @@ void Service::delete_transactions_by_type(char* type)
 		}
 	}
 }
+void Service::delete_transactions_between_days(int day1, int day2)
+{
+	int size = this->r.get_size();
+	Transaction* transactions = this->r.get_all();
+	for (int i = 0; i < size;) {
+		if (transactions[i].get_day()>=day1 && transactions[i].get_day() <= day2) {
+			this->r.delete_transaction(transactions[i]);
+			if (size == 1 || i==size-1)
+				size = 0;
+		}
+		else {
+			i++;
+		}
+	}
+}
+
 
 void Service::replace_sum_in_transaction(int replaced_sum, int day,char* type, char* description )
 {
@@ -105,20 +105,6 @@ void Service::array_with_transactions_by_type(char* type,Transaction transaction
 
 }
 
-void Service::array_with_transaction_sum_b(Transaction transactions[], int &length,int sum)
-{
-	int size = this->r.get_size();
-	Transaction* current_transactions = this->r.get_all();
-	Transaction auxiliar;
-	for (int i = 0; i < size; i++) {
-		if (current_transactions[i].get_sum() > sum)
-		{	
-			transactions[length++] = current_transactions[i];
-
-		}
-	}
-}
-
 void Service::array_with_transaction_sum_equal(Transaction transactions[], int& length,int sum)
 {
 	int size = this->r.get_size();
@@ -127,6 +113,20 @@ void Service::array_with_transaction_sum_equal(Transaction transactions[], int& 
 	for (int i = 0; i < size; i++) {
 		if (current_transactions[i].get_sum() == sum )
 		{
+			transactions[length++] = current_transactions[i];
+
+		}
+	}
+}
+
+void Service::array_with_transaction_sum_b(Transaction transactions[], int &length,int sum)
+{
+	int size = this->r.get_size();
+	Transaction* current_transactions = this->r.get_all();
+	Transaction auxiliar;
+	for (int i = 0; i < size; i++) {
+		if (current_transactions[i].get_sum() > sum)
+		{	
 			transactions[length++] = current_transactions[i];
 
 		}
@@ -149,18 +149,6 @@ int Service::sold_by_day(int day)
 	return sold;
 }
 
-int Service::sum_by_type(char* type)
-{
-	int size = this->r.get_size();
-	Transaction* transactions = this->r.get_all();
-	int sum = 0;
-	for (int i = 0; i < size; i++)
-	{
-		if (strcmp(transactions[i].get_type(), type) == 0)
-			sum += transactions[i].get_sum();
-	}
-	return sum;
-}
 
 Transaction Service::most_valuable_by_day(int day)
 {
@@ -177,22 +165,19 @@ Transaction Service::most_valuable_by_day(int day)
 	return most_valuable_transaction;
 }
 
-void Service::keep_by_type(char* type)
+int Service::sum_by_type(char* type)
 {
 	int size = this->r.get_size();
 	Transaction* transactions = this->r.get_all();
-	for (int i = 0; i < size; ) {
-		if (strcmp(transactions[i].get_type(), type) != 0) {
-			this->r.delete_transaction(transactions[i]);
-			if (size == 1 || i == size - 1)
-				size = 0;
-		}
-		else {
-			i++;
-		}
-
+	int sum = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (strcmp(transactions[i].get_type(), type) == 0)
+			sum += transactions[i].get_sum();
 	}
+	return sum;
 }
+
 
 void Service::keep_by_type_and_sum(char* type, int sum)
 {
@@ -211,5 +196,20 @@ void Service::keep_by_type_and_sum(char* type, int sum)
 	}
 
 }
+void Service::keep_by_type(char* type)
+{
+	int size = this->r.get_size();
+	Transaction* transactions = this->r.get_all();
+	for (int i = 0; i < size; ) {
+		if (strcmp(transactions[i].get_type(), type) != 0) {
+			this->r.delete_transaction(transactions[i]);
+			if (size == 1 || i == size - 1)
+				size = 0;
+		}
+		else {
+			i++;
+		}
 
+	}
+}
 

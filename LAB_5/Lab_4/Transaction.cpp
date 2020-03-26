@@ -52,23 +52,6 @@ Transaction::~Transaction()
 
 }
 
-int Transaction::get_day() {
-	return this->ziua;
-}
-
-int Transaction::get_sum() {
-	return this->suma;
-}
-
-char* Transaction::get_type() {
-
-	return this->tip;
-}
-
-char* Transaction::get_description() {
-
-	return this->descriere;
-}
 
 void Transaction::set_day(int day) {
 	this->ziua = day;
@@ -100,6 +83,23 @@ void Transaction::set_description(char* description) {
 	strcpy_s(this->descriere, 1 + strlen(description), description);
 }
 
+int Transaction::get_day() {
+	return this->ziua;
+}
+
+int Transaction::get_sum() {
+	return this->suma;
+}
+
+char* Transaction::get_type() {
+
+	return this->tip;
+}
+
+char* Transaction::get_description() {
+
+	return this->descriere;
+}
 Transaction& Transaction::operator=(const Transaction& t) {
 	this->set_day(t.ziua);
 	this->set_sum(t.suma);
